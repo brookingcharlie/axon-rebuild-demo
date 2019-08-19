@@ -21,6 +21,7 @@ class DataLoader(
         @Value("\${com.example.demo.numTransactions}") val numTransactions: Int
 ) {
     val random = Random()
+    val randomAmounts: Iterator<Int> = random.ints(1, 100).iterator()
 
     @Async
     fun createAccounts() {
@@ -42,8 +43,8 @@ class DataLoader(
     private fun createTransactions(accountNumber: String): CompletableFuture<Void> {
         val createTransactionsFutures = (1..numTransactions).map {
             val command = when (random.nextBoolean()) {
-                false -> MakeWithdrawal(accountNumber, random.nextInt())
-                true -> MakeDeposit(accountNumber, random.nextInt())
+                false -> MakeWithdrawal(accountNumber, randomAmounts.next())
+                true -> MakeDeposit(accountNumber, randomAmounts.next())
             }
             commandGateway.send<Void>(command)
         }
