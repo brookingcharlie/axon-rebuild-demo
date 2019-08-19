@@ -1,8 +1,11 @@
-package com.example.demo.subcriber
+package com.example.demo.domain.query
 
-import com.example.demo.domain.event.AccountOpened
-import com.example.demo.domain.event.DepositMade
-import com.example.demo.domain.event.WithdrawalMade
+import com.example.demo.domain.api.event.AccountOpened
+import com.example.demo.domain.api.event.DepositMade
+import com.example.demo.domain.api.event.WithdrawalMade
+import com.example.demo.domain.api.query.AccountView
+import com.example.demo.domain.api.query.AllAccountsQuery
+import com.example.demo.domain.api.query.AllAccountsResponse
 import org.axonframework.config.ProcessingGroup
 import org.axonframework.eventhandling.EventHandler
 import org.axonframework.queryhandling.QueryHandler

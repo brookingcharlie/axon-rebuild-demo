@@ -1,4 +1,4 @@
-package com.example.demo.domain.command
+package com.example.demo.domain.api.command
 
 import org.axonframework.commandhandling.TargetAggregateIdentifier
 

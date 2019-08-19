@@ -1,12 +1,12 @@
 package com.example.demo.api
 
-import com.example.demo.domain.command.MakeDeposit
-import com.example.demo.domain.command.MakeWithdrawal
+import com.example.demo.domain.api.command.MakeDeposit
+import com.example.demo.domain.api.command.MakeWithdrawal
 import com.example.demo.service.DataLoader
 import com.example.demo.service.TrackerManager
-import com.example.demo.subcriber.AccountView
-import com.example.demo.subcriber.AllAccountsQuery
-import com.example.demo.subcriber.AllAccountsResponse
+import com.example.demo.domain.api.query.AccountView
+import com.example.demo.domain.api.query.AllAccountsQuery
+import com.example.demo.domain.api.query.AllAccountsResponse
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.axonframework.queryhandling.QueryGateway
 import org.slf4j.LoggerFactory

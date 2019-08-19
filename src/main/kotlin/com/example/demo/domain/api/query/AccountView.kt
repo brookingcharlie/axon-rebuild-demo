@@ -1,4 +1,4 @@
-package com.example.demo.subcriber
+package com.example.demo.domain.api.query
 
 import javax.persistence.Entity
 import javax.persistence.Id

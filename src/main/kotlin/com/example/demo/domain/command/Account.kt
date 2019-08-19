@@ -1,11 +1,11 @@
-package com.example.demo.domain
+package com.example.demo.domain.command
 
-import com.example.demo.domain.command.OpenAccount
-import com.example.demo.domain.command.MakeDeposit
-import com.example.demo.domain.command.MakeWithdrawal
-import com.example.demo.domain.event.AccountOpened
-import com.example.demo.domain.event.DepositMade
-import com.example.demo.domain.event.WithdrawalMade
+import com.example.demo.domain.api.command.OpenAccount
+import com.example.demo.domain.api.command.MakeDeposit
+import com.example.demo.domain.api.command.MakeWithdrawal
+import com.example.demo.domain.api.event.AccountOpened
+import com.example.demo.domain.api.event.DepositMade
+import com.example.demo.domain.api.event.WithdrawalMade
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.commandhandling.model.AggregateIdentifier
 import org.axonframework.commandhandling.model.AggregateLifecycle

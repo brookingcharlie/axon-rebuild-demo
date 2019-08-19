@@ -1,8 +1,8 @@
 package com.example.demo.service
 
-import com.example.demo.domain.command.OpenAccount
-import com.example.demo.domain.command.MakeDeposit
-import com.example.demo.domain.command.MakeWithdrawal
+import com.example.demo.domain.api.command.OpenAccount
+import com.example.demo.domain.api.command.MakeDeposit
+import com.example.demo.domain.api.command.MakeWithdrawal
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 import java.util.Random
-import java.util.UUID
 import java.util.concurrent.CompletableFuture
 import kotlin.system.measureTimeMillis
 
