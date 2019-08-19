@@ -1,8 +1,8 @@
 package com.example.demo.domain.command
 
-import com.example.demo.domain.api.command.OpenAccount
 import com.example.demo.domain.api.command.MakeDeposit
 import com.example.demo.domain.api.command.MakeWithdrawal
+import com.example.demo.domain.api.command.OpenAccount
 import com.example.demo.domain.api.event.AccountOpened
 import com.example.demo.domain.api.event.DepositMade
 import com.example.demo.domain.api.event.WithdrawalMade

@@ -1,8 +1,8 @@
 package com.example.demo.service
 
-import com.example.demo.domain.api.command.OpenAccount
 import com.example.demo.domain.api.command.MakeDeposit
 import com.example.demo.domain.api.command.MakeWithdrawal
+import com.example.demo.domain.api.command.OpenAccount
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired

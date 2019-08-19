@@ -5,6 +5,8 @@ import javax.persistence.Id
 
 @Entity(name = "account")
 class AccountView {
-    @Id lateinit var accountNumber: String
+    @Id
+    lateinit var accountNumber: String
+
     var balance: Int = 0
 }
