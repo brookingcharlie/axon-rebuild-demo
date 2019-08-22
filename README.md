@@ -4,7 +4,7 @@ Demo application showing an approach to rebuilding projections when using the Ax
 
 ## Usage
 
-### Starting database
+### Starting the database
 
 ```
 docker run -d -p 9092:1521 -p 8082:81 -v db:/opt/h2-data oscarfonts/h2
@@ -12,9 +12,9 @@ docker run -d -p 9092:1521 -p 8082:81 -v db:/opt/h2-data oscarfonts/h2
 
 ### Running the server
 
-From the command line, run `mvn spring-boot:run`.
-
-In an IDE, run the `main` method as a Java application.
+```
+mvn spring-boot:run
+```
 
 ### Running example client
 
