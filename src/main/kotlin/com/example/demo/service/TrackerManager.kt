@@ -16,12 +16,12 @@ class TrackerManager(
         @Autowired val globalIndexService: GlobalIndexService
 ) {
     fun shutDown() {
-        logger.debug("[manager] shutDown()")
+        logger.debug("shutDown()")
         getTracker().shutDown()
     }
 
     fun start() {
-        logger.debug("[manager] start()")
+        logger.debug("start()")
         getTracker().start()
         logWhenCaughtUp()
     }
@@ -34,20 +34,20 @@ class TrackerManager(
             val status = tracker.processingStatus()
             if (status.isNotEmpty() && status.values.all { it.trackingToken != null && it.isCaughtUp }) {
                 val endTime = System.currentTimeMillis()
-                logger.debug("[manager] Caught up in < ${endTime - startTime} ms")
+                logger.debug("Caught up in < ${endTime - startTime} ms")
                 cancel()
             }
         }
     }
 
     fun rebuild() {
-        logger.debug("[manager] rebuild()")
+        logger.debug("rebuild()")
         getTracker().apply { shutDown(); resetTokens(); start() }
         logWhenCaughtUp()
     }
 
     fun status(): Status {
-        logger.debug("[manager] status()")
+        logger.debug("status()")
         val segmentStatusesMap: Map<Int, EventTrackerStatus> = getTracker().processingStatus()
         return Status(
                 segmentStatuses = segmentStatusesMap.values.toList(),

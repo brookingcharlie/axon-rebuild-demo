@@ -35,18 +35,18 @@ class ReprojectionMonitor(
                 .eventProcessorByProcessingGroup("reprojection-1", TrackingEventProcessor::class.java)
                 .orElse(null)
         if (tracker == null) {
-            logger.debug("[monitor] No tracker")
+            logger.debug("No tracker")
             return
         }
         val statusMap: MutableMap<Int, EventTrackerStatus> = tracker.processingStatus()
         if (statusMap.isEmpty()) {
-            logger.debug("[monitor] No status")
+            logger.debug("No status")
             return
         }
         val status: EventTrackerStatus = statusMap.values.first()
         printToken(status.trackingToken)
         if (status.isCaughtUp) {
-            logger.debug("[monitor] Caught up")
+            logger.debug("Caught up")
             tracker.shutDown()
             complete = true;
             cancel()
@@ -55,11 +55,11 @@ class ReprojectionMonitor(
 
     private fun printToken(token: TrackingToken?) {
         when (token) {
-            null -> logger.debug("[monitor] No token")
-            is GapAwareTrackingToken -> logger.debug("[monitor] Up to ${token.index}")
-            is GlobalSequenceTrackingToken -> logger.debug("[monitor] Up to ${token.globalIndex}")
+            null -> logger.debug("No token")
+            is GapAwareTrackingToken -> logger.debug("Up to ${token.index}")
+            is GlobalSequenceTrackingToken -> logger.debug("Up to ${token.globalIndex}")
             is ReplayToken -> printToken(token.currentToken)
-            else -> logger.debug("[monitor] Unfamiliar token $token")
+            else -> logger.debug("Unfamiliar token $token")
         }
     }
 

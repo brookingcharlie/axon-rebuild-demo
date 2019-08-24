@@ -18,19 +18,19 @@ import org.springframework.stereotype.Component
 class AccountProjector(@Autowired private val repository: AccountViewRepository) {
     @EventHandler
     fun on(event: AccountOpened) {
-        logger.debug("[subscriber] on(${event})")
+        logger.debug("on(${event})")
         repository.save(AccountView().apply { accountNumber = event.accountNumber; balance = 0 })
     }
 
     @EventHandler
     fun on(event: DepositMade) {
-        logger.debug("[subscriber] on(${event})")
+        logger.debug("on(${event})")
         repository.getOne(event.accountNumber).apply { balance += event.amount }
     }
 
     @EventHandler
     fun on(event: WithdrawalMade) {
-        logger.debug("[subscriber] on(${event})")
+        logger.debug("on(${event})")
         repository.getOne(event.accountNumber).apply { balance -= event.amount }
     }
 

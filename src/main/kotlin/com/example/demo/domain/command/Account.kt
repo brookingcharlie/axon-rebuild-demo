@@ -23,7 +23,7 @@ class Account {
 
     @CommandHandler
     constructor(command: OpenAccount) {
-        logger.debug("[aggregate] constructor(${command})")
+        logger.debug("constructor(${command})")
         AggregateLifecycle.apply(AccountOpened(UUID.randomUUID().toString()))
     }
 
@@ -38,25 +38,25 @@ class Account {
     }
 
     constructor() {
-        logger.debug("[aggregate] constructor()")
+        logger.debug("constructor()")
     }
 
     @EventSourcingHandler
     fun on(event: AccountOpened) {
-        logger.debug("[aggregate] on(${event})")
+        logger.debug("on(${event})")
         this.accountNumber = event.accountNumber
         this.balance = 0
     }
 
     @EventSourcingHandler
     fun on(event: DepositMade) {
-        logger.debug("[aggregate] on(${event})")
+        logger.debug("on(${event})")
         this.balance += event.amount
     }
 
     @EventSourcingHandler
     fun on(event: WithdrawalMade) {
-        logger.debug("[aggregate] on(${event})")
+        logger.debug("on(${event})")
         this.balance -= event.amount
     }
 

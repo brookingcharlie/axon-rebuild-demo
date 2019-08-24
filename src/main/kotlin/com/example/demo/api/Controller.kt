@@ -26,7 +26,7 @@ class Controller(
 ) {
     @PostMapping("/load")
     fun load() {
-        logger.info("[controller] load()")
+        logger.info("load()")
         dataLoader.createAccounts()
     }
 
@@ -47,25 +47,25 @@ class Controller(
 
     @PostMapping("/tracker/shut-down")
     fun shutDown() {
-        logger.info("[controller] shutDown()")
+        logger.info("shutDown()")
         trackerManager.shutDown()
     }
 
     @PostMapping("/tracker/start")
     fun start() {
-        logger.info("[controller] start()")
+        logger.info("start()")
         trackerManager.start()
     }
 
     @PostMapping("/tracker/rebuild")
     fun rebuild() {
-        logger.info("[controller] rebuild()")
+        logger.info("rebuild()")
         trackerManager.rebuild()
     }
 
     @GetMapping("/tracker/status")
     fun status(): TrackerManager.Status {
-        logger.info("[controller] status()")
+        logger.info("status()")
         return trackerManager.status()
     }
 

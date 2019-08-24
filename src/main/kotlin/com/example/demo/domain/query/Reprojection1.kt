@@ -13,17 +13,17 @@ import org.springframework.stereotype.Component
 class Reprojection1 {
     @EventHandler
     fun on(event: AccountOpened) {
-        logger.debug("[reprojection-1] on(${event})")
+        logger.debug("on(${event})")
     }
 
     @EventHandler
     fun on(event: DepositMade) {
-        logger.debug("[reprojection-1] on(${event})")
+        logger.debug("on(${event})")
     }
 
     @EventHandler
     fun on(event: WithdrawalMade) {
-        logger.debug("[reprojection-1] on(${event})")
+        logger.debug("on(${event})")
     }
 
     companion object {

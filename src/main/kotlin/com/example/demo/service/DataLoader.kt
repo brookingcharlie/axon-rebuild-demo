@@ -24,16 +24,16 @@ class DataLoader(
 
     @Async
     fun createAccounts() {
-        logger.debug("[loader] createAccounts()")
+        logger.debug("createAccounts()")
         val time = measureTimeMillis {
             val createAccountFutures = (1..numAccounts).map { createAccount() }
             CompletableFuture.allOf(*createAccountFutures.toTypedArray())
         }
-        logger.info("[loader] Loaded ${numAccounts} records in ${time} ms")
+        logger.info("Loaded ${numAccounts} records in ${time} ms")
     }
 
     private fun createAccount(): CompletableFuture<Void> {
-        logger.debug("[loader] createAccount()")
+        logger.debug("createAccount()")
         return commandGateway
                 .send<String>(OpenAccount())
                 .thenAccept { accountNumber -> createTransactions(accountNumber) }
