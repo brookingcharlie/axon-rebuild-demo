@@ -9,24 +9,24 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
 @Component
-@ProcessingGroup("tracker")
-class AccountProjector2 {
+@ProcessingGroup("reprojection-1")
+class Reprojection1 {
     @EventHandler
     fun on(event: AccountOpened) {
-        logger.debug("[tracker] on(${event})")
+        logger.debug("[reprojection-1] on(${event})")
     }
 
     @EventHandler
     fun on(event: DepositMade) {
-        logger.debug("[tracker] on(${event})")
+        logger.debug("[reprojection-1] on(${event})")
     }
 
     @EventHandler
     fun on(event: WithdrawalMade) {
-        logger.debug("[tracker] on(${event})")
+        logger.debug("[reprojection-1] on(${event})")
     }
 
     companion object {
-        private val logger = LoggerFactory.getLogger(AccountProjector2::class.java)
+        private val logger = LoggerFactory.getLogger(Reprojection1::class.java)
     }
 }

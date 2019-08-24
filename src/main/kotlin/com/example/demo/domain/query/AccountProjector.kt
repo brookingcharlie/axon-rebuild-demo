@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-@ProcessingGroup("subscriber")
+@ProcessingGroup("account-projector")
 class AccountProjector(@Autowired private val repository: AccountViewRepository) {
     @EventHandler
     fun on(event: AccountOpened) {

@@ -25,7 +25,7 @@ class AxonConfiguration {
 
     @PostConstruct
     fun configureEventProcessing() {
-        eventProcessingConfiguration.registerSubscribingEventProcessor("subscriber")
-        eventProcessingConfiguration.registerTrackingEventProcessor("tracker")
+        eventProcessingConfiguration.registerSubscribingEventProcessor("account-projector")
+        eventProcessingConfiguration.registerTrackingEventProcessor("reprojection-1")
     }
 }

@@ -62,7 +62,7 @@ class TrackerManager(
 
     private fun getTracker(): TrackingEventProcessor {
         return eventProcessingConfiguration
-                .eventProcessorByProcessingGroup("tracker", TrackingEventProcessor::class.java)
+                .eventProcessorByProcessingGroup("reprojection-1", TrackingEventProcessor::class.java)
                 .get()
     }
 
