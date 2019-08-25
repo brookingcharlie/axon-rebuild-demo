@@ -26,6 +26,7 @@ class AccountProjector(@Autowired private val repository: AccountViewRepository)
     fun on(event: DepositMade) {
         logger.debug("on(${event})")
         repository.getOne(event.accountNumber).apply { balance += event.amount }
+        //repository.getOne(event.accountNumber).apply { numTransactions += 1 }
     }
 
     @EventHandler
@@ -33,6 +34,7 @@ class AccountProjector(@Autowired private val repository: AccountViewRepository)
         logger.debug("on(${event})")
         repository.getOne(event.accountNumber).apply { balance += event.amount }
         //repository.getOne(event.accountNumber).apply { balance -= event.amount }
+        //repository.getOne(event.accountNumber).apply { numTransactions += 1 }
     }
 
     @QueryHandler

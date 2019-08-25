@@ -9,3 +9,5 @@ import org.springframework.stereotype.Component
 //@Component
 //@ProcessingGroup("reprojection-1")
 //class Reprojection1(@Autowired private val repository: AccountViewRepository) : AccountProjector(repository)
+
+//class Reprojection1
