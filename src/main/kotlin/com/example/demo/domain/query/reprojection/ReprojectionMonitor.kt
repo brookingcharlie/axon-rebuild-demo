@@ -2,11 +2,7 @@ package com.example.demo.domain.query.reprojection
 
 import org.axonframework.config.EventProcessingConfiguration
 import org.axonframework.eventhandling.EventTrackerStatus
-import org.axonframework.eventhandling.ReplayToken
 import org.axonframework.eventhandling.TrackingEventProcessor
-import org.axonframework.eventsourcing.eventstore.GapAwareTrackingToken
-import org.axonframework.eventsourcing.eventstore.GlobalSequenceTrackingToken
-import org.axonframework.eventsourcing.eventstore.TrackingToken
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.scheduling.annotation.Async
@@ -43,32 +39,22 @@ class ReprojectionMonitor(
                 .eventProcessor(name, TrackingEventProcessor::class.java)
                 .orElse(null)
         if (tracker == null) {
-            logger.debug("No tracker")
+            logger.info("Tracker $name not found")
             return false
         }
         val statusMap: MutableMap<Int, EventTrackerStatus> = tracker.processingStatus()
         if (statusMap.isEmpty()) {
-            logger.debug("No status")
+            logger.info("Tracker $name has no active segments")
             return false
         }
         val status: EventTrackerStatus = statusMap.values.first()
-        printToken(status.trackingToken)
+        logger.info("Tracker $name token ${status.trackingToken}")
         if (status.isCaughtUp) {
-            logger.debug("Caught up")
+            logger.info("Tracker $name has caught up")
             tracker.shutDown()
             return true
         }
         return false
-    }
-
-    private fun printToken(token: TrackingToken?) {
-        when (token) {
-            null -> logger.debug("No token")
-            is GapAwareTrackingToken -> logger.debug("Up to ${token.index}")
-            is GlobalSequenceTrackingToken -> logger.debug("Up to ${token.globalIndex}")
-            is ReplayToken -> printToken(token.currentToken)
-            else -> logger.debug("Unfamiliar token $token")
-        }
     }
 
     companion object {
