@@ -35,12 +35,12 @@ class Controller(
 
     @PostMapping("/account/{accountNumber}/deposit")
     fun makeDeposit(@PathVariable("accountNumber") accountNumber: String) {
-        commandGateway.send<Void>(MakeDeposit(accountNumber, Random().nextInt()))
+        commandGateway.send<Void>(MakeDeposit(accountNumber, Random().nextInt(100)))
     }
 
     @PostMapping("/account/{accountNumber}/withdraw")
     fun makeWithdrawal(@PathVariable("accountNumber") accountNumber: String) {
-        commandGateway.send<Void>(MakeWithdrawal(accountNumber, Random().nextInt()))
+        commandGateway.send<Void>(MakeWithdrawal(accountNumber, Random().nextInt(100)))
     }
 
     companion object {
