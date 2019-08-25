@@ -12,6 +12,23 @@ fix this by creating and running our first reprojection.
 Then we decide to include a new field in our query model: the number of transactions that have
 been made on an account. We perform another reprojection to set the value for this new column.
 
+To introduction Reprojection 1:
+
+* Uncomment changeset 0003 in `db.changelog-master.xml`
+* Uncomment withdrawal fix in `AccountProjector.kt` (and comment old line)
+* Uncomment event handler class in `Reprojection1.kt`
+* Uncomment reprojection-2 event processor registration in `ReprojectionConfiguration.kt`
+
+To introduce Reprojection 2:
+
+* Uncomment changeset 0004 in `db.changelog-master.xml`
+* Uncomment numTransactions field in `AccountView.kt`
+* Uncomment numTransactions lines in `AccountProjector.kt` (and comment old lines)
+* Uncomment event handler class in `Reprojection2.kt`
+* Uncomment reprojection-2 event processor registration in `ReprojectionConfiguration.kt`
+* Uncomment empty class in `Reprojection1.kt` (and commend old class)
+* Comment reprojection-1 event processor registration in `ReprojectionConfiguration.kt`
+
 ## Usage
 
 ### Starting the database
