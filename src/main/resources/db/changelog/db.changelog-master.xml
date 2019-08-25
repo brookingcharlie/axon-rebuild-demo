@@ -4,12 +4,22 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <changeSet id="create-axon-tables" author="dev.username">
+    <changeSet id="create-axon-tables" author="">
         <sqlFile path="0001-create-axon-tables.sql" relativeToChangelogFile="true" splitStatements="true" endDelimiter=";"/>
     </changeSet>
 
-    <changeSet id="create-account-table" author="dev.username">
+    <changeSet id="create-account-table" author="">
         <sqlFile path="0002-create-account-table.sql" relativeToChangelogFile="true" splitStatements="true" endDelimiter=";"/>
     </changeSet>
+
+    <!--
+    <changeSet id="truncate-account" author="">
+        <sqlFile path="0003-truncate-account.sql" relativeToChangelogFile="true" splitStatements="true" endDelimiter=";"/>
+    </changeSet>
+
+    <changeSet id="add-num-transactions-column" author="">
+        <sqlFile path="0004-add-num-transactions-column.sql" relativeToChangelogFile="true" splitStatements="true" endDelimiter=";"/>
+    </changeSet>
+    -->
 
 </databaseChangeLog>

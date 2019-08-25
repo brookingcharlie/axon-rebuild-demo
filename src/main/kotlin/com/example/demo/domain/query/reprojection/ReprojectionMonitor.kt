@@ -1,4 +1,4 @@
-package com.example.demo.service
+package com.example.demo.domain.query.reprojection
 
 import org.axonframework.config.EventProcessingConfiguration
 import org.axonframework.eventhandling.EventTrackerStatus
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 import java.util.Timer
-import java.util.TimerTask
 import kotlin.concurrent.schedule
 
 @Service
@@ -27,30 +26,48 @@ class ReprojectionMonitor(
 
     @Async
     fun run() {
-        Timer().schedule(0L, 100L) { checkTracker() }
+        val processingGroups: List<String> = listOf()
+        //val processingGroups: List<String> = listOf("reprojection-1")
+        //val processingGroups: List<String> = listOf("reprojection-1", "reprojection-2")
+        val processingGroupComplete = processingGroups.associate { it to false }.toMutableMap()
+        Timer().schedule(0L, 100L) {
+            processingGroups
+                    .filter { !processingGroupComplete[it]!! }
+                    .forEach { processingGroup ->
+                        if (checkTracker(processingGroup)) {
+                            logger.info("Reprojection $processingGroup complete")
+                            processingGroupComplete[processingGroup] = true
+                        }
+                    }
+            if (processingGroupComplete.values.all { it }) {
+                logger.info("All reprojections complete")
+                complete = true
+                cancel()
+            }
+        }
     }
 
-    private fun TimerTask.checkTracker() {
+    private fun checkTracker(processingGroup: String): Boolean {
         val tracker: TrackingEventProcessor? = eventProcessingConfiguration
-                .eventProcessorByProcessingGroup("reprojection-1", TrackingEventProcessor::class.java)
+                .eventProcessorByProcessingGroup(processingGroup, TrackingEventProcessor::class.java)
                 .orElse(null)
         if (tracker == null) {
             logger.debug("No tracker")
-            return
+            return false
         }
         val statusMap: MutableMap<Int, EventTrackerStatus> = tracker.processingStatus()
         if (statusMap.isEmpty()) {
             logger.debug("No status")
-            return
+            return false
         }
         val status: EventTrackerStatus = statusMap.values.first()
         printToken(status.trackingToken)
         if (status.isCaughtUp) {
             logger.debug("Caught up")
             tracker.shutDown()
-            complete = true;
-            cancel()
+            return true
         }
+        return false
     }
 
     private fun printToken(token: TrackingToken?) {

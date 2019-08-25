@@ -9,4 +9,6 @@ class AccountView {
     lateinit var accountNumber: String
 
     var balance: Int = 0
+
+    //var numTransactions: Int = 0
 }

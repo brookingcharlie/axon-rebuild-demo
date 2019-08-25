@@ -1,0 +1,1 @@
+alter table account add column num_transactions bigint default 0;

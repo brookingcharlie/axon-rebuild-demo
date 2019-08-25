@@ -31,7 +31,8 @@ class AccountProjector(@Autowired private val repository: AccountViewRepository)
     @EventHandler
     fun on(event: WithdrawalMade) {
         logger.debug("on(${event})")
-        repository.getOne(event.accountNumber).apply { balance -= event.amount }
+        repository.getOne(event.accountNumber).apply { balance += event.amount }
+        //repository.getOne(event.accountNumber).apply { balance -= event.amount }
     }
 
     @QueryHandler

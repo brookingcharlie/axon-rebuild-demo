@@ -1,6 +1,6 @@
 package com.example.demo.config
 
-import com.example.demo.service.ReprojectionMonitor
+import com.example.demo.domain.query.reprojection.ReprojectionMonitor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.web.util.matcher.RequestMatcher
 import org.springframework.stereotype.Component

@@ -6,7 +6,6 @@ import com.example.demo.domain.api.query.AccountView
 import com.example.demo.domain.api.query.AllAccountsQuery
 import com.example.demo.domain.api.query.AllAccountsResponse
 import com.example.demo.service.DataLoader
-import com.example.demo.service.TrackerManager
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.axonframework.queryhandling.QueryGateway
 import org.slf4j.LoggerFactory
@@ -21,8 +20,7 @@ import java.util.Random
 class Controller(
         @Autowired val dataLoader: DataLoader,
         @Autowired val commandGateway: CommandGateway,
-        @Autowired val queryGateway: QueryGateway,
-        @Autowired val trackerManager: TrackerManager
+        @Autowired val queryGateway: QueryGateway
 ) {
     @PostMapping("/load")
     fun load() {
@@ -43,30 +41,6 @@ class Controller(
     @PostMapping("/account/{accountNumber}/withdraw")
     fun makeWithdrawal(@PathVariable("accountNumber") accountNumber: String) {
         commandGateway.send<Void>(MakeWithdrawal(accountNumber, Random().nextInt()))
-    }
-
-    @PostMapping("/tracker/shut-down")
-    fun shutDown() {
-        logger.info("shutDown()")
-        trackerManager.shutDown()
-    }
-
-    @PostMapping("/tracker/start")
-    fun start() {
-        logger.info("start()")
-        trackerManager.start()
-    }
-
-    @PostMapping("/tracker/rebuild")
-    fun rebuild() {
-        logger.info("rebuild()")
-        trackerManager.rebuild()
-    }
-
-    @GetMapping("/tracker/status")
-    fun status(): TrackerManager.Status {
-        logger.info("status()")
-        return trackerManager.status()
     }
 
     companion object {
