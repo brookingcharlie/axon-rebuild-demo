@@ -18,28 +18,19 @@ import kotlin.concurrent.schedule
 class ReprojectionMonitor(
         @Autowired val eventProcessingConfiguration: EventProcessingConfiguration
 ) {
-    private var complete: Boolean = false
-
-    fun isComplete(): Boolean {
-        return complete;
-    }
+    final var complete: Boolean = false
+        private set
 
     @Async
     fun run() {
-        val processingGroups: List<String> = listOf()
-        //val processingGroups: List<String> = listOf("reprojection-1")
-        //val processingGroups: List<String> = listOf("reprojection-1", "reprojection-2")
-        val processingGroupComplete = processingGroups.associate { it to false }.toMutableMap()
-        Timer().schedule(0L, 100L) {
-            processingGroups
-                    .filter { !processingGroupComplete[it]!! }
-                    .forEach { processingGroup ->
-                        if (checkTracker(processingGroup)) {
-                            logger.info("Reprojection $processingGroup complete")
-                            processingGroupComplete[processingGroup] = true
-                        }
-                    }
-            if (processingGroupComplete.values.all { it }) {
+        val eventProcessors = eventProcessingConfiguration.eventProcessors().keys
+        val reprojections = eventProcessors.filter { it.startsWith("reprojection-") }
+        val reprojectionComplete = reprojections.associate { it to false }.toMutableMap()
+        Timer().schedule(0L, 1000L) {
+            reprojections
+                    .filter { !reprojectionComplete[it]!! }
+                    .forEach { reprojectionComplete[it] = checkTracker(it) }
+            if (reprojectionComplete.values.all { it }) {
                 logger.info("All reprojections complete")
                 complete = true
                 cancel()
@@ -47,9 +38,9 @@ class ReprojectionMonitor(
         }
     }
 
-    private fun checkTracker(processingGroup: String): Boolean {
+    private fun checkTracker(name: String): Boolean {
         val tracker: TrackingEventProcessor? = eventProcessingConfiguration
-                .eventProcessorByProcessingGroup(processingGroup, TrackingEventProcessor::class.java)
+                .eventProcessor(name, TrackingEventProcessor::class.java)
                 .orElse(null)
         if (tracker == null) {
             logger.debug("No tracker")
