@@ -12,6 +12,6 @@ class MaintenanceRequestMatcher : RequestMatcher {
     lateinit var reprojectionMonitor: ReprojectionMonitor
 
     override fun matches(request: HttpServletRequest): Boolean {
-        return !reprojectionMonitor.complete
+        return !reprojectionMonitor.isComplete()
     }
 }

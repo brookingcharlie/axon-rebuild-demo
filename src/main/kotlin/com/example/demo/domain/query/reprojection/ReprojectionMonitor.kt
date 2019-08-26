@@ -14,8 +14,11 @@ import kotlin.concurrent.schedule
 class ReprojectionMonitor(
         @Autowired val eventProcessingConfiguration: EventProcessingConfiguration
 ) {
-    final var complete: Boolean = false
-        private set
+    private var complete: Boolean = false
+
+    fun isComplete(): Boolean {
+        return complete;
+    }
 
     @Async
     fun run() {

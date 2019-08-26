@@ -17,7 +17,7 @@ To introduction Reprojection 1:
 * Uncomment changeset 0003 in `db.changelog-master.xml`
 * Uncomment withdrawal fix in `AccountProjector.kt` (and comment old line)
 * Uncomment event handler class in `Reprojection1.kt`
-* Uncomment reprojection-2 event processor registration in `ReprojectionConfiguration.kt`
+* Uncomment reprojection-1 event processor registration in `ReprojectionConfiguration.kt`
 
 To introduce Reprojection 2:
 
