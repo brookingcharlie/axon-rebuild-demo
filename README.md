@@ -14,20 +14,28 @@ been made on an account. We perform another reprojection to set the value for th
 
 To introduce Reprojection 1:
 
-* Uncomment changeset 0003 in `db.changelog-master.xml`
-* Uncomment withdrawal fix in `AccountProjector.kt` (and comment old line)
-* Uncomment event handler class in `Reprojection1.kt`
-* Uncomment reprojection-1 event processor registration in `ReprojectionConfiguration.kt`
+* Use SQL script to delete existing query model data:
+  * Uncomment changeset 0003 in `db.changelog-master.xml`
+* Fix bug in projector to correctly handle new events:
+  * Uncomment withdrawal fix in `AccountProjector.kt` (and comment old line)
+* Add tracking event handler to reproject old events:
+  * Uncomment event handler class in `Reprojection1.kt`
+  * Uncomment reprojection-1 event processor registration in `ReprojectionConfiguration.kt`
 
 To introduce Reprojection 2:
 
-* Uncomment changeset 0004 in `db.changelog-master.xml`
-* Uncomment numTransactions field in `AccountView.kt`
-* Uncomment numTransactions lines in `AccountProjector.kt` (and comment old lines)
-* Uncomment event handler class in `Reprojection2.kt`
-* Uncomment reprojection-2 event processor registration in `ReprojectionConfiguration.kt`
-* Uncomment empty class in `Reprojection1.kt` (and comment old class)
-* Comment reprojection-1 event processor registration in `ReprojectionConfiguration.kt`
+* Use SQL script to upgrade query model schema:
+  * Uncomment changeset 0004 in `db.changelog-master.xml`
+* Add new field to query model and update projector to handle new events:
+  * Uncomment numTransactions field in `AccountView.kt`
+  * Uncomment numTransactions lines in `AccountProjector.kt` (and comment old lines)
+* Add tracking event handler to reproject old events:
+  * Uncomment event handler class in `Reprojection2.kt`
+  * Uncomment reprojection-2 event processor registration in `ReprojectionConfiguration.kt`
+* Disable Reprojection 1 since it's made obsolete by Reprojection 2:
+  * Comment reprojection-1 event processor registration in `ReprojectionConfiguration.kt`
+* Replace old reprojection with an empty class, ensuring its name is never reused:
+  * Uncomment empty class in `Reprojection1.kt` (and comment old class)
 
 ## Usage
 
